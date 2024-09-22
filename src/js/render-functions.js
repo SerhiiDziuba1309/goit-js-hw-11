@@ -1,10 +1,9 @@
-// render-functions.js
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
 export const renderImages = images => {
   const gallery = document.querySelector('.gallery');
-  gallery.innerHTML = ''; // Очищення попередніх результатів
+  gallery.innerHTML = '';
 
   if (images.length === 0) {
     iziToast.error({
@@ -26,22 +25,24 @@ export const renderImages = images => {
         comments,
         downloads,
       }) => `
-        <div class="gallery-item">
+      <ul>
+        <li class="gallery-item">
             <a href="${largeImageURL}" class="gallery-link">
                 <img src="${webformatURL}" alt="${tags}" class="gallery-image" />
             </a>
             <div class="info">
-                <p class="info-item"><strong>Likes</strong> ${likes}</p>
-                <p class="info-item"><strong>Views</strong> ${views}</p>
-                <p class="info-item"><strong>Comments</strong> ${comments}</p>
-                <p class="info-item"><strong>Downloads</strong> ${downloads}</p>
+                <p class="info-item"><span>Likes</span> ${likes}</p>
+                <p class="info-item"><span>Views</span> ${views}</p>
+                <p class="info-item"><span>Comments</span> ${comments}</p>
+                <p class="info-item"><span>Downloads</span> ${downloads}</p>
             </div>
-        </div>
+        </li>
+        </ul>
     `
     )
     .join('');
 
-  gallery.insertAdjacentHTML('beforeend', markup);
+  gallery.innerHTML = `<div>${markup}</div>`;
 };
 
 export const showLoader = () => {
