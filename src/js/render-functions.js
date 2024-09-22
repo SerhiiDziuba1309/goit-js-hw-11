@@ -30,10 +30,10 @@ export const renderImages = images => {
                     <img src="${webformatURL}" alt="${tags}" class="gallery-image" />
                 </a>
                 <div class="info">
-                    <p class="info-item"><span>Likes:</span> ${likes}</p>
-                    <p class="info-item"><span>Views:</span> ${views}</p>
-                    <p class="info-item"><span>Comments:</span> ${comments}</p>
-                    <p class="info-item"><span>Downloads:</span> ${downloads}</p>
+                    <p class="info-item"><span>Likes</span> ${likes}</p>
+                    <p class="info-item"><span>Views</span> ${views}</p>
+                    <p class="info-item"><span>Comments</span> ${comments}</p>
+                    <p class="info-item"><span>Downloads</span> ${downloads}</p>
                 </div>
             </li>
         `

@@ -4,6 +4,7 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const searchForm = document.querySelector('.search-form');
+const galleryElement = document.querySelector('.gallery');
 const gallery = new SimpleLightbox('.gallery a');
 
 searchForm.addEventListener('submit', event => {
@@ -13,6 +14,8 @@ searchForm.addEventListener('submit', event => {
   if (!query) {
     return;
   }
+
+  galleryElement.innerHTML = '';
 
   showLoader();
   fetchImages(query)

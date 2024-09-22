@@ -7,9 +7,16 @@ export const fetchImages = query => {
   )
     .then(response => {
       if (!response.ok) {
-        throw new Error('Error fetching images');
+        throw new Error(
+          `Error fetching images: ${response.status} ${response.statusText}`
+        );
       }
       return response.json();
     })
-    .then(data => data.hits);
+    .then(data => {
+      if (data.hits.length === 0) {
+        throw new Error('No images found for this query.');
+      }
+      return data.hits;
+    });
 };
