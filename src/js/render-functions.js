@@ -3,18 +3,7 @@ import 'izitoast/dist/css/iziToast.min.css';
 
 export const renderImages = images => {
   const gallery = document.querySelector('.gallery');
-  gallery.innerHTML = '';
-
-  if (images.length === 0) {
-    iziToast.error({
-      title: 'Error',
-      message:
-        'Sorry, there are no images matching your search query. Please try again!',
-    });
-    return;
-  }
-
-  const markup = images
+  gallery.innerHTML = images
     .map(
       ({
         webformatURL,
@@ -39,13 +28,19 @@ export const renderImages = images => {
         `
     )
     .join('');
+};
 
-  gallery.innerHTML = markup;
+export const showError = message => {
+  iziToast.error({
+    title: 'Error',
+    message,
+  });
 };
 
 export const showLoader = () => {
   const loader = document.querySelector('.loader');
-  loader.style.display = 'block';
+  loader.innerHTML = '<div class="spinner"></div>';
+  loader.style.display = 'flex';
 };
 
 export const hideLoader = () => {
