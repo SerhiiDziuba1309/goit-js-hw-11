@@ -15,7 +15,7 @@ export const fetchImages = query => {
     })
     .then(data => {
       if (data.hits.length === 0) {
-        throw new Error('No images found for this query.');
+        return [];
       }
       return data.hits;
     });

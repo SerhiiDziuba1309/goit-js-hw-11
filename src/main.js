@@ -20,16 +20,14 @@ searchForm.addEventListener('submit', event => {
   showLoader();
   fetchImages(query)
     .then(images => {
+      if (images.length === 0) {
+        return;
+      }
       renderImages(images);
       gallery.refresh();
     })
     .catch(error => {
       console.error(error);
-      iziToast.error({
-        title: 'Error',
-        message:
-          'An error occurred while fetching images. Please try again later.',
-      });
     })
     .finally(() => {
       hideLoader();
