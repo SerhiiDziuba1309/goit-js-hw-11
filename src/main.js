@@ -12,7 +12,7 @@ const searchForm = document.querySelector('.search-form');
 const galleryElement = document.querySelector('.gallery');
 let gallery = new SimpleLightbox('.gallery a');
 
-searchForm.addEventListener('submit', async event => {
+searchForm.addEventListener('submit', event => {
   event.preventDefault();
 
   const query = event.target.elements.query.value.trim();
@@ -24,19 +24,23 @@ searchForm.addEventListener('submit', async event => {
   galleryElement.innerHTML = '';
 
   showLoader();
-  try {
-    const images = await fetchImages(query);
-    if (images.length === 0) {
-      showError(
-        'Sorry, there are no images matching your search query. Please try again!'
-      );
-      return;
-    }
-    renderImages(images);
-    gallery.refresh();
-  } catch (error) {
-    showError(`Error fetching images: ${error.message}`);
-  } finally {
-    hideLoader();
-  }
+
+  fetchImages(query)
+    .then(images => {
+      if (images.length === 0) {
+        showError(
+          'Sorry, there are no images matching your search query. Please try again!'
+        );
+        return;
+      }
+
+      renderImages(images);
+      gallery.refresh();
+    })
+    .catch(error => {
+      showError(`Error fetching images: ${error.message}`);
+    })
+    .finally(() => {
+      hideLoader();
+    });
 });
